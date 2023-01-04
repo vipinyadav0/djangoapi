@@ -1,7 +1,3 @@
 __pycache__
-env
-staticfiles
-staticfiles/
 env/
 static
-
