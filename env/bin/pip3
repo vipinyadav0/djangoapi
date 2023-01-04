@@ -1,4 +1,4 @@
-#!/Users/vipyadav/Desktop/Django/djangoapi/env/bin/python3
+#!/Users/vipyadav/Desktop/Django/djangoapi/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
