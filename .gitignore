@@ -3,4 +3,5 @@ env
 staticfiles
 staticfiles/
 env/
+static
 
