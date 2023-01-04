@@ -1,7 +1,12 @@
 
-from django.urls import path
-from .views import DataTest
+from django.urls import path, include
+from .views import Students
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+
 
 urlpatterns = [
-    path('v1/data/', DataTest)
+    path('', include(router.urls)),
+    path('v1/students/', Students.as_view())
 ]
