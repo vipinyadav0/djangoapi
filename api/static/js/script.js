@@ -4,3 +4,5 @@ function result() {
     console.log(res.json)
 }
 result()
+
+console.log("object");
