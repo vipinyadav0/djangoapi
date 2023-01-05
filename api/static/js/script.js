@@ -1,8 +1,8 @@
-
-function result() {
-    const res = fetch('https://djangoapi.up.railway.app/api/v1/students/')
-    console.log(res)
+async function getData() {
+    const response = await fetch('https://djangoapi.up.railway.app/api/v1/students/');
+    const data = await response.json();
+    console.log(data);
 }
-result()
 
+getData()
 console.log("object");
