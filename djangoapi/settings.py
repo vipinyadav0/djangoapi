@@ -147,4 +147,4 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
-CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'http://127.0.0.1:3001/']

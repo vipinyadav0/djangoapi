@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, mixins, decorators
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -54,34 +54,38 @@ class StudentDetail(APIView):
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class StudentViewSets(viewsets.ViewSet):
+class StudentViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     A simple viewsets for listing or retrieving teachers.
     """
 
-    def list(self, request):
-        queryset = Student.objects.all()
-        serializer = StudentSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    #     return Response(serializer.data)
     
-    def retrieve(self, request, pk=None):
-        queryset = Student.objects.all()
-        teacher = get_object_or_404(queryset, pk=pk)
-        serializer = StudentSerializer(teacher)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     queryset = Student.objects.all()
+    #     teacher = get_object_or_404(queryset, pk=pk)
+    #     serializer = StudentSerializer(teacher)
+    #     return Response(serializer.data)
 
-class TeacherViewSets(viewsets.ViewSet):
+class TeacherViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     A simple viewsets for listing or retrieving teachers.
     """
+    queryset = Teacher.objects.all()
+    serializer_class = TeachersSerializer
 
-    def list(self, request):
-        queryset = Teacher.objects.all()
-        serializer = TeachersSerializer(queryset, many=True)
-        return Response(serializer.data)
+
+    # def list(self, request):
+    #     queryset = Teacher.objects.all()
+    #     serializer = TeachersSerializer(queryset, many=True)
+    #     return Response(serializer.data)
     
-    def retrieve(self, request, pk=None):
-        queryset = Teacher.objects.all()
-        teacher = get_object_or_404(queryset, pk=pk)
-        serializer = TeachersSerializer(teacher)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     queryset = Teacher.objects.all()
+    #     teacher = get_object_or_404(queryset, pk=pk)
+    #     serializer = TeachersSerializer(teacher)
+    #     return Response(serializer.data)
+    
