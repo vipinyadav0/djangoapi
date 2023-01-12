@@ -34,7 +34,6 @@ class User(models.Model):
     email = models.EmailField(max_length=50, null=False, blank=False)
     familyName = models.CharField(max_length=20, null=False, blank=False)
     givenName = models.CharField(max_length=20, null=False, blank=False)
-    googleId = models.IntegerField(null=True, blank=True)
     imageUrl = models.URLField(null=True, blank=True)
 
     def __str__(self):
