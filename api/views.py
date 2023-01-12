@@ -92,15 +92,23 @@ class MediaViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retriev
     serializer_class = MediaSerializer
     queryset = Media.objects.all()
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            if user.is_superuser:
+                return Media.objects.all()
+            else:
+                return Media.objects.filter(user=user)
+        else:
+            return Media.objects.none()
+
+
     
 class UserViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
     
     def perform_create(self, serializer):
         if User.objects.filter(email=serializer.validated_data['email']).exists():
-            raise ValidationError("This field must be unique.")
+            raise ValidationError("Email field must be unique.")
         serializer.save()
