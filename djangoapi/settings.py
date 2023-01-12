@@ -45,6 +45,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -157,4 +159,4 @@ CORS_ALLOW_METHODS = [
 ]
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'http://127.0.0.1:3001/', 'http://localhost:3000', 'http://localhost:3000']
 
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
