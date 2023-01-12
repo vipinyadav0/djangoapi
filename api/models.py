@@ -23,7 +23,19 @@ class Teacher(models.Model):
         verbose_name_plural = 'Teachers'
 
 class Media(models.Model):
-    file = models.FileField(upload_to='upload/', blank=False)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='upload/', blank=False, null=False)
 
     class Meta:
         verbose_name_plural = 'Medias'
+
+class User(models.Model):
+    name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=20, null=False, blank=False)
+    familyName = models.CharField(max_length=20, null=False, blank=False)
+    givenName = models.CharField(max_length=20, null=False, blank=False)
+    googleId = models.IntegerField(null=True, blank=True)
+    imageUrl = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name

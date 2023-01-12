@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Student, Teacher, Media
+from .models import Student, Teacher, Media, User
 import base64
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,3 +41,8 @@ class MediaSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         file_url = obj.file.url
         return request.build_absolute_uri(file_url)
+
+class UserSerializer(serializers.ModelField):
+    class Meta:
+        model = User
+        fields="__all__"
