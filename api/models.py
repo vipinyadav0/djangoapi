@@ -31,7 +31,7 @@ class Media(models.Model):
 
 class User(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
-    email = models.EmailField(max_length=20, null=False, blank=False)
+    email = models.EmailField(max_length=50, null=False, blank=False)
     familyName = models.CharField(max_length=20, null=False, blank=False)
     givenName = models.CharField(max_length=20, null=False, blank=False)
     googleId = models.IntegerField(null=True, blank=True)
