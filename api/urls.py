@@ -1,11 +1,13 @@
 
 from django.urls import path, include
-from .views import Students, TeacherViewSets, StudentViewSets, StudentsList, StudentDetail, MediaListView, MediaViewSets
+from .views import Students, TeacherViewSets, StudentViewSets, StudentsList, StudentDetail, MediaListView, MediaViewSets, UserViewSets
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'teachers', TeacherViewSets, basename='teacher')
 router.register(r'students', StudentViewSets, basename='students')
 router.register(r'media', MediaViewSets, basename='media')
+router.register(r'users', UserViewSets, basename='user')
+
 
 # router.register(r'files', FileViewSets, basename='files')
 

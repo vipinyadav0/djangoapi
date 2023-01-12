@@ -35,14 +35,14 @@ class MediaSerializer(serializers.ModelSerializer):
     file_url = serializers.SerializerMethodField()
     class Meta:
         model = Media
-        fields = ('id','file_url')
+        fields = ('id','user','file_url')
 
     def get_file_url(self, obj):
         request = self.context.get('request')
         file_url = obj.file.url
         return request.build_absolute_uri(file_url)
 
-class UserSerializer(serializers.ModelField):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields="__all__"
+        fields ="__all__"

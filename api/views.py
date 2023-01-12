@@ -5,8 +5,8 @@ from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Student, Teacher, Media
-from .serializers import StudentSerializer, TeachersSerializer, MediaSerializer
+from .models import Student, Teacher, Media, User
+from .serializers import StudentSerializer, TeachersSerializer, MediaSerializer, UserSerializer
 
 # Create your views here.
 
@@ -54,7 +54,7 @@ class StudentDetail(APIView):
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class StudentViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class StudentViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
     """
     A simple viewsets for listing or retrieving teachers.
     """
@@ -90,3 +90,6 @@ class MediaViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retriev
     queryset = Media.objects.all()
 
     
+class UserViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
