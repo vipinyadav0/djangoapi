@@ -5,8 +5,8 @@ from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Student, Teacher
-from .serializers import StudentSerializer, TeachersSerializer
+from .models import Student, Teacher, Media
+from .serializers import StudentSerializer, TeachersSerializer, MediaSerializer
 
 # Create your views here.
 
@@ -70,22 +70,23 @@ class StudentViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retri
     #     serializer = StudentSerializer(teacher)
     #     return Response(serializer.data)
 
-class TeacherViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class TeacherViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
     """
     A simple viewsets for listing or retrieving teachers.
     """
     queryset = Teacher.objects.all()
     serializer_class = TeachersSerializer
 
+# class FileViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
+#     queryset = Media.objects.all()
+#     serializer_class = FileSerializer
 
-    # def list(self, request):
-    #     queryset = Teacher.objects.all()
-    #     serializer = TeachersSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+class MediaListView(ListAPIView):
+    serializer_class = MediaSerializer
+    queryset = Media.objects.all()
     
-    # def retrieve(self, request, pk=None):
-    #     queryset = Teacher.objects.all()
-    #     teacher = get_object_or_404(queryset, pk=pk)
-    #     serializer = TeachersSerializer(teacher)
-    #     return Response(serializer.data)
+class MediaViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
+    serializer_class = MediaSerializer
+    queryset = Media.objects.all()
+
     

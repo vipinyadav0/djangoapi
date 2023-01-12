@@ -22,8 +22,8 @@ class Teacher(models.Model):
     class Meta:
         verbose_name_plural = 'Teachers'
 
-class File(models.Model):
-    file = models.FileField(upload_to='upload/')
+class Media(models.Model):
+    file = models.FileField(upload_to='upload/', blank=False)
 
     class Meta:
-        verbose_name_plural = 'Files'
+        verbose_name_plural = 'Medias'
