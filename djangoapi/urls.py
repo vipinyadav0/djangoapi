@@ -25,4 +25,9 @@ urlpatterns = [
     path('api/v1/', include('api.urls')),
     path('', TemplateView.as_view(template_name="api/home.html")),
     path('api-auth/', include('rest_framework.urls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

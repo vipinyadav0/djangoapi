@@ -21,3 +21,9 @@ class Teacher(models.Model):
     
     class Meta:
         verbose_name_plural = 'Teachers'
+
+class File(models.Model):
+    file = models.FileField(upload_to='upload/')
+
+    class Meta:
+        verbose_name_plural = 'Files'
