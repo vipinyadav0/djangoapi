@@ -4,9 +4,12 @@ from rest_framework import status, viewsets, mixins, decorators
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.validators import ValidationError
 
 from .models import Student, Teacher, Media, User
 from .serializers import StudentSerializer, TeachersSerializer, MediaSerializer, UserSerializer
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
@@ -93,3 +96,11 @@ class MediaViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.Retriev
 class UserViewSets(mixins.CreateModelMixin,mixins.ListModelMixin,mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.DestroyModelMixin):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+    
+    def perform_create(self, serializer):
+        if User.objects.filter(email=serializer.validated_data['email']).exists():
+            raise ValidationError("This field must be unique.")
+        serializer.save()
